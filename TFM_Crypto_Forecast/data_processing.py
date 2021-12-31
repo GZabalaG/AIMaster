@@ -19,7 +19,7 @@ class DataProcessor:
         for crypto in self.cryptos:
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
             df = pd.read_csv(path)
-            self.crypto_df.append(crypto)
+            self.crypto_df.append(df)
 
     def clean_data(self): # Clean method
         '''
