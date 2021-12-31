@@ -25,7 +25,7 @@ class DataProcessor:
         '''
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
-        #fffor crypto in crypto_df:
+        #for crypto in crypto_df:
 
     def get_crypto_df(self, crypto_name):
         '''
