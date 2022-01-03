@@ -11,51 +11,56 @@ class DataProcessor:
         '''
         self.cryptos = cryptos
 
-    def load_data(self): # Load mehtod
+    def load_data(self): # Load method
         '''
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
         for crypto in self.cryptos:
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
-            df = pd.read_csv(path)
+            df = pd.read_csv(path, header=[0])
             self.crypto_df.append(df)
 
-    def clean_data(self): # Clean method
+    def clean_data(self, crypto_name): # Clean method
         '''
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
         #for crypto in crypto_df:
-        print('Hello')
 
-    def get_crypto_df(self, crypto_name):
+    def get_data(self, crypto_name):
         '''
-        Returns crypto dataframe
+        Returns crypto dataframe with crypto_name
         '''
         return(self.crypto_df[self.cryptos.index(crypto_name)])
 
-# Feautre extraction method
-'''
-- Relative strength index (RSI)
-- Average directional index (ADX)
-- Ichimoku cloud
-- Standard deviation
-- Bollinger bands
-- Stochastic oscillator
-- Moving average convergence divergence (MACD)
-- Fib. Retracement
-- Exponential moving average (EMA)
-- Close-open difference
-- Close price above or below open (boolean)
-- Support and resistance levels
-'''
+    def feature_extraction(self, crypto_name): # Feautre extraction method
+        '''
+        Extracts features from df
+        - Relative strength index (RSI)
+        - Average directional index (ADX)
+        - Ichimoku cloud
+        - Standard deviation
+        - Bollinger bands
+        - Stochastic oscillator
+        - Moving average convergence divergence (MACD)
+        - Fib. Retracement
+        - Exponential moving average (EMA)
+        - Close-open difference
+        - Close price above or below open (boolean)
+        - Support and resistance levels
+        '''
 
-# Anomaly detection method
-'''
-Build non supervised methods to detect outliers and anomalies and discard data
-'''
+    def feature_selection(self, crypto_name): # Feautre selection method
+        '''
+        Eliminates features not relevant or highly correlated to others
+        '''
 
-# Train-test split method
-'''
-Analize best train-test split method and returns datasets separated in train and test
-'''
+    def detect_anomalies(self, crypto_name): # Anomaly detection method
+        '''
+        Build non supervised methods to detect outliers and anomalies and discard data
+        '''
+
+    def train_test_split(self, crypto_name): # Train-test split method
+        '''
+        Analize best train-test split method and returns datasets separated in train and test
+        '''
