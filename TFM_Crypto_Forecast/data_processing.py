@@ -32,7 +32,8 @@ class DataProcessor:
             print('Drop Nan')
             df.dropna(inplace =True)
             print('Change date format')
-            df.loc['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+            df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+
 
     def get_data(self, crypto_name):
         '''
