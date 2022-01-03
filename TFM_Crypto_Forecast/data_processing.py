@@ -16,16 +16,23 @@ class DataProcessor:
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
+        self.crypto_df_map = {}
+        i = 0
         for crypto in self.cryptos:
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
+            self.crypto_df_map[crypto] = i
+            i+=1
 
     def clean_data(self, crypto_name): # Clean method
         '''
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
-        #for crypto in crypto_df:
+        for df in self.crypto_df:
+            df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
+            df = df.dropna()
+            df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
 
     def get_data(self, crypto_name):
         '''
