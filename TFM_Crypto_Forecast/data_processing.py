@@ -16,23 +16,30 @@ class DataProcessor:
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
+        self.crypto_map = {}
+        i = 0
         for crypto in self.cryptos:
             print('Loading...', crypto)
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
+            self.crypto_map[i] = crypto
+            i+=1
 
     def clean_data(self, crypto_name): # Clean method
         '''
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
+        i = 0
         for df in self.crypto_df:
-            print('Drop columns')
-            df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
-            print('Drop Nan')
-            df.dropna(inplace =True)
-            print('Change date format')
-            df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+            if self.crypto_map.get(i) == crypto_name:
+                print('Drop columns')
+                df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
+                print('Drop Nan')
+                df.dropna(inplace =True)
+                print('Change date format')
+                df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+            i+=1
 
 
     def get_data(self, crypto_name):
@@ -44,6 +51,9 @@ class DataProcessor:
     def feature_extraction(self, crypto_name): # Feautre extraction method
         '''
         Extracts features from df
+        - Close-open difference
+        - Close price above or below open (boolean)
+        - Support and resistance levels
         - Relative strength index (RSI)
         - Average directional index (ADX)
         - Ichimoku cloud
@@ -53,9 +63,6 @@ class DataProcessor:
         - Moving average convergence divergence (MACD)
         - Fib. Retracement
         - Exponential moving average (EMA)
-        - Close-open difference
-        - Close price above or below open (boolean)
-        - Support and resistance levels
         '''
 
     def feature_selection(self, crypto_name): # Feautre selection method
