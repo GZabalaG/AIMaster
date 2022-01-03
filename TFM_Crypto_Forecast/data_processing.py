@@ -32,7 +32,7 @@ class DataProcessor:
         for df in self.crypto_df:
             df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
             df = df.dropna()
-            df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+            df.loc['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
 
     def get_data(self, crypto_name):
         '''
