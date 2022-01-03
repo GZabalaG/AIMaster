@@ -16,9 +16,9 @@ class DataProcessor:
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
-        for crypto in self.cryptos:
-            print('Loading...', crypto)
-            path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
+        for crypto_name in self.cryptos_names:
+            print('Loading...', crypto_name)
+            path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto_name + '.csv'
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
 
