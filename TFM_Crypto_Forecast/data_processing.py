@@ -44,7 +44,7 @@ class DataProcessor:
         '''
         return(self.crypto_df[self.cryptos_names.index(crypto_name)])
 
-    def feature_extraction(self, cryptos_names): # Feautre extraction method
+    def feature_extraction(self, cryptos_names): # Feature extraction method
         '''
         Extracts features from df
         - Close-open difference
