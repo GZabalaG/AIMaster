@@ -22,13 +22,13 @@ class DataProcessor:
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
 
-    def clean_data(self, crypto_name): # Clean method
+    def clean_data(self, cryptos_names): # Clean method
         '''
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
         i = 0
         for df in self.crypto_df:
-            if self.cryptos_names[i] == crypto_name:
+            if self.cryptos_names[i] in cryptos_names: # if crypto is already loaded
                 print('Drop columns')
                 df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
                 print('Drop Nan')
@@ -44,7 +44,7 @@ class DataProcessor:
         '''
         return(self.crypto_df[self.cryptos_names.index(crypto_name)])
 
-    def feature_extraction(self, crypto_name): # Feautre extraction method
+    def feature_extraction(self, cryptos_names): # Feautre extraction method
         '''
         Extracts features from df
         - Close-open difference
@@ -60,6 +60,29 @@ class DataProcessor:
         - Fib. Retracement
         - Exponential moving average (EMA)
         '''
+        i = 0
+        for df in self.crypto_df:
+            if self.cryptos_names[i] in cryptos_names:
+                df['Difference'] = 0
+                df['Result'] = 0
+                df['Support 1'] = 0
+                df['Support 2'] = 0
+                df['Support 3'] = 0
+                df['Support 4'] = 0
+                df['Ressistance 1'] = 0
+                df['Ressistance 2'] = 0
+                df['Ressistance 3'] = 0
+                df['Ressistance 4'] = 0
+                df['RSI'] = 0
+                df['ADX'] = 0
+                df['Ichimoku'] = 0
+                df['Standard Deviation'] = 0
+                df['Bollinger'] = 0
+                df['Stochastic Oscillator'] = 0
+                df['MACD'] = 0
+                df['Fib Retracement'] = 0
+                df['EMA'] = 0
+            i+=1
 
     def feature_selection(self, crypto_name): # Feautre selection method
         '''
