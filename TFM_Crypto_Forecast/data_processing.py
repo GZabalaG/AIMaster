@@ -9,22 +9,18 @@ class DataProcessor:
         '''
         API conector and cryptos list to analize
         '''
-        self.cryptos = cryptos
+        self.cryptos_names = cryptos
 
     def load_data(self): # Load method
         '''
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
-        self.crypto_map = {}
-        i = 0
         for crypto in self.cryptos:
             print('Loading...', crypto)
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
-            self.crypto_map[i] = crypto
-            i+=1
 
     def clean_data(self, crypto_name): # Clean method
         '''
@@ -32,7 +28,7 @@ class DataProcessor:
         '''
         i = 0
         for df in self.crypto_df:
-            if self.crypto_map.get(i) == crypto_name:
+            if self.cryptos_names[i] == crypto_name:
                 print('Drop columns')
                 df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
                 print('Drop Nan')
@@ -46,7 +42,7 @@ class DataProcessor:
         '''
         Returns crypto dataframe with crypto_name
         '''
-        return(self.crypto_df[self.cryptos.index(crypto_name)])
+        return(self.crypto_df[self.cryptos_names.index(crypto_name)])
 
     def feature_extraction(self, crypto_name): # Feautre extraction method
         '''
