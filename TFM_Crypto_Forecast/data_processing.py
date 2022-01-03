@@ -33,6 +33,7 @@ class DataProcessor:
             df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
             df = df.dropna()
             df.loc['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
+            df
 
     def get_data(self, crypto_name):
         '''
