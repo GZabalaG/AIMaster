@@ -16,14 +16,11 @@ class DataProcessor:
         Get Data from cryptos selected in constructor or requested by args
         '''
         self.crypto_df = []
-        self.crypto_df_map = {}
-        i = 0
         for crypto in self.cryptos:
+            print('Loading...', crypto)
             path = '/content/drive/MyDrive/Master IA/TFM - Crypto/Datasets/' + crypto + '.csv'
             df = pd.read_csv(path, header=[1])
             self.crypto_df.append(df)
-            self.crypto_df_map[crypto] = i
-            i+=1
 
     def clean_data(self, crypto_name): # Clean method
         '''
