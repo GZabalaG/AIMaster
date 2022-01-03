@@ -30,8 +30,11 @@ class DataProcessor:
         Cleans data to prepare it for better models comprehension and feature extraction
         '''
         for df in self.crypto_df:
+            print('Drop columns')
             df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
+            print('Drop Nan')
             df.dropna(inplace =True)
+            print('Change date format')
             df.loc['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
             df
 
