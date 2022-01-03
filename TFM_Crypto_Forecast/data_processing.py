@@ -63,8 +63,9 @@ class DataProcessor:
         i = 0
         for df in self.crypto_df:
             if self.cryptos_names[i] in cryptos_names:
-                df['Difference'] = 0
-                df['Result'] = 0
+                df['High Low Difference'] = df['high'] - df['low']
+                df['Open Close Difference'] = df['open'] - df['close']
+                df['Result'] = 1 if df['High Low Difference'] > 0 else 0
                 df['Support 1'] = 0
                 df['Support 2'] = 0
                 df['Support 3'] = 0
