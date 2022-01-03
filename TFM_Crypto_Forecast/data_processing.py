@@ -31,7 +31,7 @@ class DataProcessor:
         '''
         for df in self.crypto_df:
             df.drop(columns=['symbol', 'unix', 'Volume USDT'], inplace = True)
-            df = df.dropna()
+            df.dropna(inplace =True)
             df.loc['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d %H:%M:%S')
             df
 
